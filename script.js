@@ -26,3 +26,11 @@ for (let nContainer = 1; nContainer <= nth_grid; nContainer++){
 
 // append to body element
 document.body.appendChild(mainContainer);
+
+// create hoverhandler
+hoverHandler = (event) => {
+    event.target.style.backgroundColor = 'yellow';
+};
+
+gridSelect = document.querySelector('.mainContainer');
+gridSelect.addEventListener('mouseover', hoverHandler);
