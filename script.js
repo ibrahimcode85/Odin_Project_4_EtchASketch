@@ -1,36 +1,46 @@
 // set the number of n for nxn grid
-const nth_grid = 16;
+const nth_grid = 20;
 
 // create big container
-let mainContainer = document.createElement('div');
-mainContainer.setAttribute('class', 'mainContainer');
+let containerGrid = document.createElement('div');
+containerGrid.setAttribute('class', 'containerGrid');
 
-for (let nContainer = 1; nContainer <= nth_grid; nContainer++){
+for (let nRow = 1; nRow <= nth_grid; nRow++){
     
-    let container = document.createElement('div');
-    container.setAttribute('class','container');
+    let containerRow = document.createElement('div');
+    containerRow.setAttribute('class','containerRow');
    
-    //add grid to container
+    //add grid to the row container
     for (let nGrid = 1; nGrid <= nth_grid; nGrid++){
         
-        let gridText = `grid_${nContainer}-${nGrid}`;
+        let gridText = `grid_${nRow}-${nGrid}`;
         let grid = document.createElement('div');
         grid.setAttribute('class', 'grid');
         grid.setAttribute('id', gridText);
-        container.appendChild(grid);
+        containerRow.appendChild(grid);
     }
 
     //append to main container
-    mainContainer.appendChild(container); 
+    containerGrid.appendChild(containerRow); 
 };
 
 // append to body element
-document.body.appendChild(mainContainer);
+document.body.appendChild(containerGrid);
 
 // create hoverhandler
 hoverHandler = (event) => {
-    event.target.style.backgroundColor = 'yellow';
+    if (event.target.classList.contains('grid')) {
+        event.target.style.backgroundColor = 'black';
+        event.target.style.border = '1px solid black';
+
+        event.stopPropagation();
+    };
+    
 };
 
-gridSelect = document.querySelector('.mainContainer');
+gridSelect = document.querySelector('.containerGrid');
 gridSelect.addEventListener('mouseover', hoverHandler);
+
+
+// try to use mouseenter(mouseover without propagation) and add eventlistener during grid creation.
+// create container for input and button, and container for drawing.
