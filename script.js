@@ -1,5 +1,5 @@
 // set the number of n for nxn grid
-const nth_grid = 20;
+const nth_grid = 100;
 
 // create big container
 let containerGrid = document.createElement('div');
@@ -25,7 +25,8 @@ for (let nRow = 1; nRow <= nth_grid; nRow++){
 };
 
 // append to body element
-document.body.appendChild(containerGrid);
+let drawing_container = document.querySelector('.drawing_container');
+drawing_container.appendChild(containerGrid);
 
 // create hoverhandler
 hoverHandler = (event) => {
@@ -42,5 +43,5 @@ gridSelect = document.querySelector('.containerGrid');
 gridSelect.addEventListener('mouseover', hoverHandler);
 
 
-// try to use mouseenter(mouseover without propagation) and add eventlistener during grid creation.
+
 // create container for input and button, and container for drawing.
