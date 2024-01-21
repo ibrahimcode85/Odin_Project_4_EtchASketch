@@ -1,5 +1,6 @@
-// set the number of n for nxn grid
+// set the initial n for 'n x n' grid
 const nth_grid = 100;
+let n_grid = 10;
 
 // create big container
 let containerGrid = document.createElement('div');
@@ -39,9 +40,13 @@ hoverHandler = (event) => {
     
 };
 
+// create button click handler
+clickHandler = () => {
+    n_grid = prompt('Enter the n for nxn grid.');
+};
+
 gridSelect = document.querySelector('.containerGrid');
 gridSelect.addEventListener('mouseover', hoverHandler);
 
-
-
-// create container for input and button, and container for drawing.
+buttonSelect = document.querySelector('button');
+buttonSelect.addEventListener('click', clickHandler);
