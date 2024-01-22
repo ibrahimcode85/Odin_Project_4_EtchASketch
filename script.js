@@ -1,10 +1,14 @@
 // set the default n for 'n x n' grid
 let nDefaultNumber = 10;
+let opacityFactor = 0.0;
 
 // function for button click
 clickHandler = () => {
     nInputText = prompt("Enter the number 'n' for 'n x n' grid.");
     nInputNum  = Number(nInputText);
+
+    //reset opacity factor
+    opacityFactor = 0.0;
 
     // remove grid
     removeGrid();
@@ -76,6 +80,13 @@ hoverHandler = (event) => {
         event.target.style.border = '1px solid black';
 
         event.stopPropagation();
+
+        if (opacityFactor < 1.0) {
+            opacityFactor = opacityFactor + 0.01;
+            console.log(opacityFactor);
+        };
+
+        event.target.style.opacity = `${opacityFactor}`;
     };
     
 };
