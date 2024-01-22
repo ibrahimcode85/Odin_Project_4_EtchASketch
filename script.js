@@ -1,9 +1,34 @@
-// set the initial n for 'n x n' grid
-const nth_grid = 100;
-let n_grid = 10;
+// set the default n for 'n x n' grid
+let nDefaultNumber = 10;
+
+// function for button click
+clickHandler = () => {
+    nInputText = prompt("Enter the number 'n' for 'n x n' grid.");
+    nInputNum  = Number(nInputText);
+
+    // remove grid
+    removeGrid();
+
+    // set to default n if the input is blank or more than 100
+    if (nInputNum == '') {
+        nInputNum = nDefaultNumber;
+        alert('Input is blank. 10 x 10 grid is created as default.');
+
+    } else if (nInputNum > 100) {
+        nInputNum = nDefaultNumber;
+        alert('Input is more than 100. 10 x 10 grid is created as default to save on performance.');
+    };
+
+    // create grid based on user input
+    createGrid(nInputNum);
+
+    // add event listener to grid
+    gridSelect = document.querySelector('.containerGrid');
+    gridSelect.addEventListener('mouseover', hoverHandler);
+};
 
 // function to reset grid container
-function removeGrid () {
+removeGrid = () => {
     const container = document.querySelector('.containerGrid');
     
     if (container !== null) {
@@ -11,34 +36,40 @@ function removeGrid () {
     };
 };
 
-// create big container
-let containerGrid = document.createElement('div');
-containerGrid.setAttribute('class', 'containerGrid');
+// function to create grids
+createGrid =(nNumber) => {
 
-for (let nRow = 1; nRow <= nth_grid; nRow++){
+    // create container for all grids
+    let containerGrid = document.createElement('div');
+    containerGrid.setAttribute('class', 'containerGrid');
+
+    // create row of grids and append it to the container
+    for (let nRow = 1; nRow <= nNumber; nRow++){
     
-    let containerRow = document.createElement('div');
-    containerRow.setAttribute('class','containerRow');
-   
-    //add grid to the row container
-    for (let nGrid = 1; nGrid <= nth_grid; nGrid++){
-        
-        let gridText = `grid_${nRow}-${nGrid}`;
-        let grid = document.createElement('div');
-        grid.setAttribute('class', 'grid');
-        grid.setAttribute('id', gridText);
-        containerRow.appendChild(grid);
-    }
+        let containerRow = document.createElement('div');
+        containerRow.setAttribute('class','containerRow');
+       
+        //add grid to the row container
+        for (let nGrid = 1; nGrid <= nNumber; nGrid++){
+            
+            let gridText = `grid_${nRow}-${nGrid}`;
+            let grid = document.createElement('div');
+            grid.setAttribute('class', 'grid');
+            grid.setAttribute('id', gridText);
+            containerRow.appendChild(grid);
+        }
+    
+        //append to main container
+        containerGrid.appendChild(containerRow); 
+    };
 
-    //append to main container
-    containerGrid.appendChild(containerRow); 
-};
+    // append the container grids to the drawing area
+    let containerDrawArea = document.querySelector('.containerDrawArea');
+    containerDrawArea.appendChild(containerGrid);
 
-// append to body element
-let drawing_container = document.querySelector('.drawing_container');
-drawing_container.appendChild(containerGrid);
+}
 
-// create hoverhandler
+// function for mouse hovering on grids
 hoverHandler = (event) => {
     if (event.target.classList.contains('grid')) {
         event.target.style.backgroundColor = 'black';
@@ -49,14 +80,6 @@ hoverHandler = (event) => {
     
 };
 
-// create button click handler
-clickHandler = () => {
-    n_grid = prompt('Enter the n for nxn grid.');
-};
-
-gridSelect = document.querySelector('.containerGrid');
-gridSelect.addEventListener('mouseover', hoverHandler);
-
+// add event listener to button 
 buttonSelect = document.querySelector('button');
-// buttonSelect.addEventListener('click', clickHandler);
-buttonSelect.addEventListener('click', removeGrid);
+buttonSelect.addEventListener('click', clickHandler);
