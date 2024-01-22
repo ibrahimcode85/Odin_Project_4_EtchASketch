@@ -2,6 +2,15 @@
 const nth_grid = 100;
 let n_grid = 10;
 
+// function to reset grid container
+function removeGrid () {
+    const container = document.querySelector('.containerGrid');
+    
+    if (container !== null) {
+        container.remove();
+    };
+};
+
 // create big container
 let containerGrid = document.createElement('div');
 containerGrid.setAttribute('class', 'containerGrid');
@@ -49,4 +58,5 @@ gridSelect = document.querySelector('.containerGrid');
 gridSelect.addEventListener('mouseover', hoverHandler);
 
 buttonSelect = document.querySelector('button');
-buttonSelect.addEventListener('click', clickHandler);
+// buttonSelect.addEventListener('click', clickHandler);
+buttonSelect.addEventListener('click', removeGrid);
